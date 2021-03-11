@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsChallenge", "ContactsChallenge\ContactsChallenge.csproj", "{DED6470D-71C7-446D-A389-8CBFF4EF6180}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsChallenge.Tests", "ContactsChallenge.Tests\ContactsChallenge.Tests.csproj", "{532B6100-ADDE-4110-BB24-3FF60EF60857}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DED6470D-71C7-446D-A389-8CBFF4EF6180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED6470D-71C7-446D-A389-8CBFF4EF6180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED6470D-71C7-446D-A389-8CBFF4EF6180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED6470D-71C7-446D-A389-8CBFF4EF6180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{532B6100-ADDE-4110-BB24-3FF60EF60857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{532B6100-ADDE-4110-BB24-3FF60EF60857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{532B6100-ADDE-4110-BB24-3FF60EF60857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{532B6100-ADDE-4110-BB24-3FF60EF60857}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {446B914F-DF60-4E93-ADE1-D90AC9846CEE}
+	EndGlobalSection
+EndGlobal
