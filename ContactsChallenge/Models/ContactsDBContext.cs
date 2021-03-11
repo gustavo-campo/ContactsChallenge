@@ -9,7 +9,7 @@ namespace ContactsChallenge.Models
         {
             //ingresar la connection string
             optionsBuilder
-                .UseSqlServer(@"Data Source=LAPTOP-5D4APV4V\MSSQLSERVER01;Initial Catalog=ContactsChallengeDB;Integrated Security=True");
+                .UseSqlServer(@"");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
