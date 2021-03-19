@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 
 namespace ContactsChallenge.Controllers
 {
@@ -18,6 +19,7 @@ namespace ContactsChallenge.Controllers
     {
         // POST: api/Contacts
         // mediante esta ruta se crean nuevos elementos en la base
+        [EnableCors]
         [HttpPost]
         public async Task<IActionResult> PostContactAsync(TempContact tempContact)
         {
@@ -73,6 +75,7 @@ namespace ContactsChallenge.Controllers
 
         // GET: api/Contacts
         // mediante esta ruta se consulta la lista completa de contactos
+        [EnableCors]
         [HttpGet]
         public async Task<IActionResult> GetAllContactsAsync([FromQuery] PaginationFilter filter)
         {
@@ -132,6 +135,7 @@ namespace ContactsChallenge.Controllers
 
         // GET: api/Contacs/id/1
         // mediante esta ruta se consultan los contactos filtrando por id
+        [EnableCors]
         [HttpGet("id/{id}")]
         public async Task<IActionResult> GetContactByIdAsync(int id)
         {
@@ -177,6 +181,7 @@ namespace ContactsChallenge.Controllers
         // GET: api/Contacts/company/JuanPerez S.A.
         // mediante esta ruta se consulta la lista completa de contactos filtrando por el nombre de empresa
         // recibimos el nombre de la empresa como parametro
+        [EnableCors]
         [HttpGet("company/{company}")]
         public async Task<IActionResult> GetContactsByCompanyAsync([FromQuery] PaginationFilter filter, string company)
         {
@@ -238,6 +243,7 @@ namespace ContactsChallenge.Controllers
 
         // PUT: api/Contacts/id/1
         // mediante esta ruta se actualizan los datos de un registro indicado por id
+        [EnableCors]
         [HttpPut("id/{id}")]
         public async Task<IActionResult> UpdateContactAsync(int id, TempContact tempContact)
         {
@@ -274,6 +280,7 @@ namespace ContactsChallenge.Controllers
 
         // DELETE: api/Contacts/id/1
         //mediante esta ruta se elimina un registro, si se le pasa un id valido
+        [EnableCors]
         [HttpDelete("id/{id}")]
         public async Task<ActionResult<Contact>> DeleteContactAsync(int id)
         {
