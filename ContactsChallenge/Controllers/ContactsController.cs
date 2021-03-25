@@ -219,7 +219,7 @@ namespace ContactsChallenge.Controllers
                     //en caso de no encontrar registros
                     errorMessage = "404";
                     usrMessage = "No se encontraron registros para la compañía indicada.";
-                } 
+                }
                 else
                 {
                     //en caso afirmativo
@@ -230,6 +230,65 @@ namespace ContactsChallenge.Controllers
                 //retornamos la lista utilizando un wrapper
                 return Ok(
                     new PagedResponse<List<Contact>>(pagedContacts, validFilter.PageNumber, validFilter.PageSize, totalContacts.Count(), errorMessage, usrMessage)
+                    );
+            }
+            catch (Exception e)
+            {
+                //capturamos la excepcion
+                return NotFound(
+                    Helper.CustomMessageResponseHelper(false, null, "Excepción inesperada", "Se ha producido el siguiente error: " + e.ToString())
+                    );
+            }
+        }
+
+        // GET: api/companies
+        // mediante esta ruta se consulta la lista completa de empresas
+        [EnableCors]
+        [HttpGet("companies")]
+        public async Task<IActionResult> GetAllCompaniesAsync()
+        {
+            //inicializamos mensajes para el usuario
+            string usrMessage = "";
+            string errorMessage = "";
+
+            try
+            {
+                //creamos una lista para guardar los resultados de la base paginados
+                List<string> pagedContacts = new List<string>();
+
+                //creamos una lista para guardar todos los resultados de la base
+                List<Contact> totalContacts = new List<Contact>();
+
+                using (var _context = new ContactsDBContext())
+                {
+                    //en primer lugar consultamos la cantidad de elementos en la base
+                    totalContacts = await _context.Contacts.ToListAsync();
+
+                    //consultamos todo el contenido de la base
+                    pagedContacts = await _context.Contacts
+                                            .Select(i => i.Company)
+                                            .Distinct()
+                                            .ToListAsync();
+
+                }
+
+                //modificamos los mensajes para el usuario de acuerdo a lo necesitado
+                if (pagedContacts.Count() == 0)
+                {
+                    //en caso de no encontrar registros
+                    errorMessage = "404";
+                    usrMessage = "No se encontraron registros para la compañía indicada.";
+                } 
+                else
+                {
+                    //en caso afirmativo
+                    errorMessage = "200OK";
+                    usrMessage = "";
+                }
+
+                //retornamos la lista utilizando un wrapper
+                return Ok(
+                    new PagedResponse<List<string>>(pagedContacts, 1, 1, pagedContacts.Count(), errorMessage, usrMessage)
                     );
             }
             catch (Exception e)
