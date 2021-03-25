@@ -144,6 +144,9 @@ Respuesta:
 
 Como vemos nos informa en que pagina de resultados estamos parados, así como la cantidad de registros que se muestran y la cantidad total de registros.
 
+# GET: api/Contacts/companies
+Este método devuelve el listado de empresas registradas.
+
 # GET: api/Contacts/id/{id: int}
 Este método toma el id de un contacto y devuelve los datos completos del mismo.
 
