@@ -180,9 +180,9 @@ namespace ContactsChallenge.Controllers
 
         // GET: api/Contacts/company/JuanPerez S.A.
         // mediante esta ruta se consulta la lista completa de contactos filtrando por el nombre de empresa
-        // recibimos el nombre de la empresa como parametro
+        // recibimos el nombre de la empresa como parametro, en caso de ser nulo se devuelve la lista completa
         [EnableCors]
-        [HttpGet("company/{company}")]
+        [HttpGet("company/{company?}")]
         public async Task<IActionResult> GetContactsByCompanyAsync([FromQuery] PaginationFilter filter, string company)
         {
             //filtro que valida si los parametros son validos o no
@@ -201,15 +201,29 @@ namespace ContactsChallenge.Controllers
 
                 using (var _context = new ContactsDBContext())
                 {
-                    //en primer lugar consultamos la cantidad de elementos en la base
-                    totalContacts = await _context.Contacts.Where(i => i.Company == company).ToListAsync();
+                    if ( string.IsNullOrEmpty(company) || company == "Todos")
+                    {
+                        //en primer lugar consultamos la cantidad de elementos en la base
+                        totalContacts = await _context.Contacts.ToListAsync();
 
-                    //consultamos todo el contenido de la base
-                    pagedContacts = await _context.Contacts
-                                            .Where(i => i.Company == company)
-                                            .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
-                                            .Take(validFilter.PageSize)
-                                            .ToListAsync();
+                        //consultamos todo el contenido de la base
+                        pagedContacts = await _context.Contacts
+                                                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                                                .Take(validFilter.PageSize)
+                                                .ToListAsync();
+                    } 
+                    else 
+                    {
+                        //en primer lugar consultamos la cantidad de elementos en la base
+                        totalContacts = await _context.Contacts.Where(i => i.Company == company).ToListAsync();
+
+                        //consultamos todo el contenido de la base
+                        pagedContacts = await _context.Contacts
+                                                .Where(i => i.Company == company)
+                                                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                                                .Take(validFilter.PageSize)
+                                                .ToListAsync();
+                    }
 
                 }
 
